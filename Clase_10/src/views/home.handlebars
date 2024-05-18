@@ -1,0 +1,12 @@
+<h1>Lista de productos estáticos</h1>
+{{#each allProducts}}
+    <p>ID: {{this.id}}</p>
+    <p>Nombre: {{this.title}}</p>
+    <p>Categoría: {{this.category}}</p>
+    <p>Descripción: {{this.description}}</p>
+    <p>Precio: {{this.price}}</p>
+    <p>Imagen: {{this.thumbnail}}</p>
+    <p>Código: {{this.code}}</p>
+    <p>Stock: {{this.stock}}</p>
+    <br />
+{{/each}}

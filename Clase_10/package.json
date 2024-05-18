@@ -1,0 +1,30 @@
+{
+  "name": "desafio4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "sass-watch": "sass --no-source-map --watch src/sass/styles.scss src/public/css/styles.css",
+    "nodemon-watch": "nodemon src/app.js",
+    "node-watch": "node src/app.js",
+    "start": "npm-run-all --parallel sass-watch node-watch",
+    "dev": "npm-run-all --parallel sass-watch nodemon-watch" 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.77.0",
+    "socket.io": "^4.7.5",
+    "uuid": "^9.0.1"
+  }
+}
