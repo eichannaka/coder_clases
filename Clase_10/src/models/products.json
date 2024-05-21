@@ -1,1 +1,46 @@
-[{"id":1,"title":"Mouse","category":"perifericos","description":"Mouse Redragon","price":40000,"thumbnail":[],"code":"30","stock":10,"status":true},{"id":2,"title":"Teclado","category":"perifericos","description":"Teclado Redragon","price":60000,"thumbnail":[],"code":"20","stock":10,"status":true},{"id":3,"title":"Parlante","category":"perifericos","description":"Parlante Edifier","price":"40000","thumbnail":[],"code":"50","stock":"20","status":true},{"id":4,"title":"Monitor","category":"perifericos","description":"Monitor Samsung","price":"200000","thumbnail":[],"code":"70","stock":"5","status":true}]
+[
+    {
+        "id": 1,
+        "title": "Cámara",
+        "category": "fotografía",
+        "description": "Cámara Canon EOS",
+        "price": 1200000,
+        "thumbnail": [],
+        "code": "100",
+        "stock": 8,
+        "status": true
+    },
+    {
+        "id": 2,
+        "title": "Lente",
+        "category": "fotografía",
+        "description": "Lente Canon EF 50mm",
+        "price": 500000,
+        "thumbnail": [],
+        "code": "101",
+        "stock": 15,
+        "status": true
+    },
+    {
+        "id": 3,
+        "title": "Trípode",
+        "category": "fotografía",
+        "description": "Trípode Manfrotto",
+        "price": 150000,
+        "thumbnail": [],
+        "code": "102",
+        "stock": 30,
+        "status": true
+    },
+    {
+        "id": 4,
+        "title": "Flash",
+        "category": "fotografía",
+        "description": "Flash Speedlite",
+        "price": 250000,
+        "thumbnail": [],
+        "code": "103",
+        "stock": 12,
+        "status": true
+    }
+]
