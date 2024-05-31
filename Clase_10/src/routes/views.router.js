@@ -13,7 +13,7 @@ viewsRouter.get('/', async (req, res) => {
 viewsRouter.get('/realtimeproducts', async (req, res) => {
     let allProducts = await productManager.getProducts();
     res.render('realtimeproducts', {
-        title: "Backend | Carabajal",
+        title: "Backend",
         products: allProducts});
 })
 
