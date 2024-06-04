@@ -1,0 +1,9 @@
+[
+    {
+        "id": 2,
+        "description": "Parlante Edifier",
+        "price": 100000,
+        "stock": 6,
+        "status": true
+    }
+]
