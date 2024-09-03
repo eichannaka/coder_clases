@@ -1,0 +1,14 @@
+<h1>Register User</h1>
+
+{{#if error}}
+<div style="color: red;">{{error}}</div>
+{{/if}}
+
+<form action="/users/register" method="post">
+    Firstname<input type="text" name="first_name" id="" required/>
+    Lastname<input type="text" name="last_name" id="" required/>
+    Email<input type="email" name="email" id="" required/>
+    Age<input type="number" name="age" id="" required/>
+    Password<input type="password" name="password" id="" required/>
+    <input type="submit" value="REGISTER" >
+</form>

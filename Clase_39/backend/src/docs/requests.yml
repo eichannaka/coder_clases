@@ -1,0 +1,73 @@
+components:
+  parameters:
+    schemas:
+      products:
+        type: object
+        required:
+          - title
+          - description
+          - price
+          - img
+          - code
+          - stock
+          - category
+        properties:
+          title:
+            type: string
+            description: Título del producto
+            example: Título del producto
+          description:
+            type: string
+            description: Descripción del producto
+            example: Descripción del producto
+          price:
+            type: number
+            description: Precio del producto
+            example: 100
+          img:
+            type: string
+            description: Imagen del producto
+            example: http://www.imagen.com
+          code:
+            type: string
+            description: Código del producto
+            example: P001
+          stock:
+            type: number
+            description: Stock del producto
+            example: 60
+          category:
+            type: string
+            description: Categoría del producto
+            example: Periféricos
+      users:
+        type: object
+        required:
+          - first_name
+          - last_name
+          - email
+          - age
+          - password
+        properties:
+          first_name:
+            type: string
+            description: Nombre del usuario
+            example: Marcelo
+          last_name:
+            type: string
+            description: Apellido del usuario
+            example: Sánchez
+          email:
+            type: string
+            description: Correo electrónico del usuario
+            example: marc.sánchez@example.com
+          age:
+            type: number
+            description: Edad del usuario
+            example: 30
+          password:
+            type: string
+            description: Contraseña del usuario
+            example: sad765sadf5asd7d6asd77asd
+
+            

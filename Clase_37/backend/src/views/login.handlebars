@@ -1,0 +1,18 @@
+<h1>LOGIN</h1>
+
+{{#if error}}
+<div style="color: red;">{{error}}</div>
+{{/if}}
+
+<form action="/users/login" method="post">
+  Email<input type="text" name="email" id="" required />
+  Password<input type="password" name="password" id="" required />
+  <input class="btnLogin" type="submit" value="LOGIN" />
+</form>
+
+<h1>Login with Github</h1>
+<a href="/users/register-github">Login with Github</a>
+<a href="/users//oauth2/redirect/accounts.google.com">Login with Google</a>
+
+<h2>NEW USER?</h2>
+<button class="btnMove" onclick="location.href='/views/register'">GO REGISTER</button>

@@ -1,0 +1,14 @@
+<h2>Profile</h2>
+<h4>Welcome, {{user.first_name}} {{user.last_name}}</h4>
+<img src="{{ user.image }}" alt="User avatar" />
+<h4>Email: {{user.email}}</h4>
+<h4>Role: {{user.role}}</h4>
+
+<button
+  class="btnMove"
+  onclick="location.href='/products'"
+>go to products</button>
+
+<form action="/users/logout" method="post">
+    <input type="submit" value="Logout">
+</form>

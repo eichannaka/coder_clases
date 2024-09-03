@@ -1,0 +1,19 @@
+{{!-- home.handlebars --}}
+{{#*inline "head"}}
+    <link rel="stylesheet" href="/css/styles.css">
+{{/inline}}
+
+<h1>Lista de productos estáticos</h1>
+{{#each allProducts}}
+    <div class="product">
+        <p><strong>ID:</strong> {{this.id}}</p>
+        <p><strong>Nombre:</strong> {{this.title}}</p>
+        <p><strong>Categoría:</strong> {{this.category}}</p>
+        <p><strong>Descripción:</strong> {{this.description}}</p>
+        <p><strong>Precio:</strong> {{this.price}}</p>
+        <p><strong>Imagen:</strong> <img src="{{this.thumbnail}}" alt="{{this.title}}"></p>
+        <p><strong>Código:</strong> {{this.code}}</p>
+        <p><strong>Stock:</strong> {{this.stock}}</p>
+        <br />
+    </div>
+{{/each}}

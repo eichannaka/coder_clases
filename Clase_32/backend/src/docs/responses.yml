@@ -1,0 +1,695 @@
+components:
+  schema:
+    users:
+      Register:
+        type: object
+        properties:
+          first_name:
+            type: string
+            description: Nombre del usuario
+            example: Marcelo
+          last_name:
+            type: string
+            description: Apellido del usuario
+            example: Sánchez
+          email:
+            type: string
+            description: Correo electrónico del usuario
+            example: marcio@example.com
+          age:
+            type: number
+            description: Edad del usuario
+            example: 30
+          role:
+            type: string
+            description: Rol del usuario
+            example: admin
+          cart:
+            type: object
+            description: Carrito del usuario
+            properties:
+              _id:
+                type: string
+                description: ID del carrito
+                example: 5f7f7d7d7d7d7d7d7d7d7d7d7
+              products:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    product:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: ID del producto
+                          example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                        title:
+                          type: string
+                          description: Título del producto
+                          example: Producto 1
+                        description:
+                          type: string
+                          description: Descripción del producto
+                          example: Silla gamer con led
+                        price:
+                          type: number
+                          description: Precio del producto
+                          example: 400000
+                        img:
+                          type: string
+                          description: Imagen del producto
+                          example: []
+                        code:
+                          type: string
+                          description: Código del producto
+                          example: P001
+                        stock:
+                          type: number
+                          description: Stock del producto
+                          example: 100
+                        category:
+                          type: string
+                          description: Categoría del producto
+                          example: Accesorios
+                        status:
+                          type: boolean
+                          description: Estado del producto
+                          example: true
+                        __v:
+                          type: number
+                          description: Versión del producto
+                          example: 0
+                    quantity:
+                      type: number
+                      description: Cantidad del producto
+                      example: 2
+              __v:
+                type: number
+                description: Versión del carrito
+                example: 0     
+      Login:
+        type: object
+        properties:
+          email:
+            type: string
+            description: Correo electrónico del usuario
+            example: correo@correo.com
+          password:
+            type: string
+            description: Contraseña del usuario
+            example: 1234567890
+      LoginOk:
+        type: object
+        properties:
+          data:
+            type: string
+            description: Token de autenticación
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNiOGUwOWE5YjYwYjhlODJjZjcwMTIiLCJyb2xlIjoicHJlbWl1bSIsImlhdCI6MTcyNTE1NjEwMywiZXhwIjoxNzI1MTU2NzAzfQ.AubpMwlPFI9d_ErfmnykQqN4_yo8GgYteELBcjns8tU
+      Current:
+        type: object
+        properties:
+          first_name:
+            type: string
+            description: Nombre del usuario
+            example: Marcelo
+          last_name:
+            type: string
+            description: Apellido del usuario
+            example: Sánchez
+          email:
+            type: string
+            description: Correo electrónico del usuario
+            example: Sánchez
+          age:
+            type: number
+            description: Edad del usuario
+            example: 30
+          role:
+            type: string
+            description: Rol del usuario
+            example: premium
+          cart:
+            type: object
+            description: Carrito del usuario
+            properties:
+              _id:
+                type: string
+                description: ID del carrito
+                example: 5f7f7d7d7d7d7d7d7d7d7d7d7
+              products:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    product:
+                      type: object
+                      properties:
+                        _id:
+                          type: string
+                          description: ID del producto
+                          example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                        title:
+                          type: string
+                          description: Título del producto
+                          example: Producto 1
+                        description:
+                          type: string
+                          description: Descripción del producto
+                          example: Silla gamer con led
+                        price:
+                          type: number
+                          description: Precio del producto
+                          example: 400000
+                        img:
+                          type: string
+                          description: Imagen del producto
+                          example: []
+                        code:
+                          type: string
+                          description: Código del producto
+                          example: P001
+                        stock:
+                          type: number
+                          description: Stock del producto
+                          example: 100
+                        category:
+                          type: string
+                          description: Categoría del producto
+                          example: Accesorios
+                        status:
+                          type: boolean
+                          description: Estado del producto
+                          example: true
+                        __v:
+                          type: number
+                          description: Versión del producto
+                          example: 0
+                    quantity:
+                      type: number
+                      description: Cantidad del producto
+                      example: 2
+              __v:
+                type: number
+                description: Versión del carrito
+                example: 0     
+      Logout:
+        type: object
+        properties:
+          msg:
+            type: string
+            description: logout successful
+            example: logout successful
+      InternalServerError: 
+        type: object
+        properties:
+          message:
+            type: string
+            description: Error del servidor
+    products:
+      Create:
+        type: object
+        required:
+          - title
+          - description
+          - price
+          - img
+          - code
+          - stock
+          - category
+        properties:
+          title:
+            type: string
+            description: Título del producto
+            example: Título del producto
+          description:
+            type: string
+            description: Descripción del producto
+            example: Descripción del producto
+          price:
+            type: number
+            description: Precio del producto
+            example: 100
+          img:
+            type: string
+            description: Imagen del producto
+            example: []
+          code:
+            type: string
+            description: Código del producto
+            example: P001
+          stock:
+            type: number
+            description: Stock del producto
+            example: 60
+          category:
+            type: string
+            description: Categoría del producto
+            example: Periféricos
+      CreateOk:
+        type: object
+        properties:
+          title:
+            type: string
+            description: Título del producto
+            example: Título del producto
+          description:
+            type: string
+            description: Descripción del producto
+            example: Descripción del producto
+          price:
+            type: number
+            description: Precio del producto
+            example: 100
+          img:
+            type: string
+            description: Imagen del producto
+            example: []
+          code:
+            type: string
+            description: Código del producto
+            example: P001
+          stock:
+            type: number
+            description: Stock del producto
+            example: 60
+          category:
+            type: string
+            description: Categoría del producto
+            example: Periféricos
+          status:
+            type: boolean
+            description: Estado del producto
+            example: true
+          owner:
+            type: string
+            description: ID del usuario
+            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+          _id:
+            type: string
+            description: ID del producto
+            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+          __v:
+            type: number
+            description: Versión del producto
+            example: 0
+      GetAllProducts:
+        type: array
+        items:
+          properties:
+            _id:
+              type: string
+              description: ID del producto
+              example: 5f7f7d7d7d7d7d7d7d7d7d7d
+            title:
+              type: string
+              description: Título del producto
+              example: Título del producto
+            description:
+              type: string
+              description: Descripción del producto
+              example: Descripción del producto
+            price:
+              type: number
+              description: Precio del producto
+              example: 100
+            img:
+              type: string
+              description: Imagen del producto
+              example: []
+            code:
+              type: string
+              description: Código del producto
+              example: P001
+            stock:
+              type: number
+              description: Stock del producto
+              example: 60
+            category:
+              type: string
+              description: Categoría del producto
+              example: Periféricos
+            status:
+              type: boolean
+              description: Estado del producto
+              example: true
+            __v:
+              type: number
+              description: Versión del producto
+              example: 0        
+      GetProductById:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: ID del producto
+            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+          title:
+            type: string
+            description: Título del producto
+            example: Título del producto
+          description:
+            type: string
+            description: Descripción del producto
+            example: Descripción del producto
+          price:
+            type: number
+            description: Precio del producto
+            example: 100
+          img:
+            type: string
+            description: Imagen del producto
+            example: []
+          code:
+            type: string
+            description: Código del producto
+            example: P001
+          stock:
+            type: number
+            description: Stock del producto
+            example: 60
+          category:
+            type: string
+            description: Categoría del producto
+            example: Periféricos
+          status:
+            type: boolean
+            description: Estado del producto
+            example: true
+          owner:
+            type: string
+            description: ID del usuario
+            example: 66cb8e09agd4rb8e82cf7012
+          __v:
+            type: number
+            description: Versión del producto
+            example: 0
+      UpdateProduct:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Producto actualizado correctamente
+        example:
+          message: Producto actualizado correctamente
+      DeleteProduct:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: ID del producto
+            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+          title:
+            type: string
+            description: Título del producto
+            example: Título del producto
+          description:
+            type: string
+            description: Descripción del producto
+            example: Descripción del producto
+          price:
+            type: number
+            description: Precio del producto
+            example: 100
+          img:
+            type: string
+            description: Imagen del producto
+            example: []
+          code:
+            type: string
+            description: Código del producto
+            example: P001
+          stock:
+            type: number
+            description: Stock del producto
+            example: 60
+          category:
+            type: string
+            description: Categoría del producto
+            example: Periféricos
+          status:
+            type: boolean
+            description: Estado del producto
+            example: true
+          owner:
+            type: string
+            description: ID del usuario
+            example: 66cb8e09agd4rb8e82cf7012
+          __v:
+            type: number
+            description: Versión del producto
+            example: 0
+        example:
+          _id: 5f7f7d7d7d7d7d7d7d7d7d7d
+          title: Título del producto
+          description: Descripción del producto
+          price: 100
+          img: []
+          code: P001
+          stock: 60
+          category: Periféricos
+          status: true
+          owner: 66cb8e09agd4rb8e82cf7012
+          __v: 0
+      InternalServerError: 
+        type: object
+        properties:
+          message:
+            type: string
+            description: Error del servidor
+      ErrorGetById:
+        type: object
+        properties:
+          message:
+            type: string
+            description: No se encontró el ID en la base de datos
+        example:
+          message: No se encontró el ID df3234234drdf3434243235df en la base de datos
+    carts:
+      Create:
+        type: object
+        properties:
+          products:
+            type: array
+            items:
+              type: object
+              properties:
+                product:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: ID del producto
+                      example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                    title:
+                      type: string
+                      description: Título del producto
+                      example: Producto 1
+                    description:
+                      type: string
+                      description: Descripción del producto
+                      example: Silla gamer con led
+                    price:
+                      type: number
+                      description: Precio del producto
+                      example: 400000
+                    img:
+                      type: string
+                      description: Imagen del producto
+                      example: []
+                    code:
+                      type: string
+                      description: Código del producto
+                      example: P001
+                    stock:
+                      type: number
+                      description: Stock del producto
+                      example: 100
+                    category:
+                      type: string
+                      description: Categoría del producto
+                      example: Accesorios
+                    status:
+                      type: boolean
+                      description: Estado del producto
+                      example: true
+                    __v:
+                      type: number
+                      description: Versión del producto
+                      example: 0
+                quantity:
+                  type: number
+                  description: Cantidad del producto
+                  example: 2
+            example:
+              products:
+                - product:
+                    _id: 5f7f7d7d7d7d7d7d7d7d7d7d
+                    title: Producto 1
+                    description: Silla gamer con led
+                    price: 400000
+                    img: []
+                    code: P001
+                    stock: 100
+                    category: Accesorios
+                    status: true
+                    __v: 0
+                  quantity: 2
+          __v:
+            type: number
+            description: Versión del carrito
+            example: 0
+      CreateOk:
+        type: object
+        properties:
+          products:
+            type: array
+            items:
+              type: object
+              properties:
+                product:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: ID del producto
+                      example: producto1
+                    title:  
+                      type: string
+                      description: Título del producto
+                      example: Producto 1
+      GetAllCarts:
+        type: array
+        items:
+          properties:
+            _id:
+              type: string
+              description: ID del carrito
+              example: 5f7f7d7d7d7d7d7d7d7d7d7d
+            products:
+              type: array
+              items:
+                type: object
+                properties:
+                  product:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: ID del producto
+                        example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                      title:
+                        type: string
+                        description: Título del producto
+                        example: Producto 1
+                      description:
+                        type: string
+                        description: Descripción del producto
+                        example: Silla gamer con led
+                      price:
+                        type: number
+                        description: Precio del producto
+                        example: 400000
+                      img:
+                        type: string
+                        description: Imagen del producto
+                        example: []
+                      code:
+                        type: string
+                        description: Código del producto
+                        example: P001
+                      stock:
+                        type: number
+                        description: Stock del producto
+                        example: 100
+                      category:
+                        type: string
+                        description: Categoría del producto
+                        example: Accesorios
+                      status:
+                        type: boolean
+                        description: Estado del producto
+                        example: true
+                      __v:
+                        type: number
+                        description: Versión del producto
+                        example: 0
+                  quantity:
+                    type: number
+                    description: Cantidad del producto
+                    example: 2
+              __v:
+                type: number
+                description: Versión del carrito
+                example: 0
+      GetCartById:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: ID del carrito
+            example: 5f7f7d7d7d7d7d7d7d7d7d7d
+          products:
+            type: array
+            items:
+              type: object
+              properties:
+                product:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      description: ID del producto
+                      example: 5f7f7d7d7d7d7d7d7d7d7d7d
+                    title:
+                      type: string
+                      description: Título del producto
+                      example: Producto 1
+                    description:
+                      type: string
+                      description: Descripción del producto
+                      example: Silla gamer con led
+                    price:
+                      type: number
+                      description: Precio del producto
+                      example: 400000
+                    img:
+                      type: string
+                      description: Imagen del producto
+                      example: []
+                    code:
+                      type: string
+                      description: Código del producto
+                      example: P001
+                    stock:
+                      type: number
+                      description: Stock del producto
+                      example: 100
+                    category:
+                      type: string
+                      description: Categoría del producto
+                      example: Accesorios
+                    status:
+                      type: boolean
+                      description: Estado del producto
+                      example: true
+                    __v:
+                      type: number
+                      description: Versión del producto
+                      example: 0
+                quantity:
+                  type: number
+                  description: Cantidad del producto
+                  example: 2
+            __v:
+              type: number
+              description: Versión del carrito
+              example: 0
+      AddProductToCart:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Producto agregado al carrito
+        example:
+          message: Producto agregado al carrito 

@@ -1,0 +1,312 @@
+paths:
+  /users/register:
+    post:
+      tags:
+      - users
+      summary: Crear un nuevo usuario
+      description: Este endpoint permite crear un nuevo usuario.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/users'
+        required: true
+      responses:
+        200:
+          description: Usuario creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/Register'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/InternalServerError'              
+  /users/login:
+    post:
+      tags:
+      - users
+      summary: Autenticación de usuario
+      description: Este endpoint permite autenticar a un usuario.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schema/users/Login'
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Correo electrónico del usuario
+                  example: user@gmail.com
+                password:
+                  type: string
+                  description: Contraseña del usuario
+                  example: 1234567890                          
+        required: true
+      responses:
+        200:
+          description: Usuario autenticado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/LoginOk'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/InternalServerError'
+  /users/current:
+    get:
+      tags:
+      - users
+      summary: Obtener usuario actual
+      description: Este endpoint permite obtener el usuario actual.
+      responses:
+        200:
+          description: Usuario obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/Current'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/InternalServerError'
+  /users/logout:
+    post:
+      tags:
+      - users
+      summary: Cerrar sesión
+      description: Este endpoint permite cerrar la sesión del usuario.
+      responses:
+        200:
+          description: logout successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/Logout'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/InternalServerError'
+  /products:
+    get:
+      tags:
+      - products
+      summary: Listar productos
+      description: Este endpoint permite listar los productos.
+      parameters:
+        - name: page
+        - name: limit
+          in: query
+          description: Número de productos por página
+          schema:
+            type: string
+      responses:
+        200:
+          description: Productos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/GetAllProducts'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/InternalServerError'
+    post:
+      tags:
+      - products
+      summary: Crear un nuevo producto
+      description: Este endpoint permite crear un nuevo producto.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schema/products/Create'
+        required: true
+      responses:
+        200:
+          description: Producto creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/CreateOk'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/InternalServerError'          
+  /products/{productId}:
+    get:
+      tags:
+      - products
+      summary: Obtener un producto por ID
+      description: Este endpoint permite obtener un producto.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/GetProductById'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/InternalServerError'
+    put:
+      tags:
+      - products
+      summary: Actualizar un producto
+      description: Este endpoint permite actualizar un producto.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schema/products/Update'
+        required: true
+      responses:
+        200:
+          description: Producto actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/UpdateProduct'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/InternalServerError'
+    delete:
+      tags:
+      - products
+      summary: Eliminar un producto
+      description: Este endpoint permite eliminar un producto.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/DeleteProduct'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/products/InternalServerError'
+  /carts:
+    get:
+      tags:
+      - carts
+      summary: Listar carritos
+      description: Este endpoint permite listar los carritos.
+      responses:
+        200:
+          description: Carritos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/GetAllCarts'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/InternalServerError'
+  /carts/products/{productId}:
+    put:
+      tags:
+      - carts
+      summary: Agregar un producto al carrito
+      description: Este endpoint permite agregar un producto al carrito.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto agregado al carrito correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/AddProductToCart'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/InternalServerError'
+  /carts/{cartId}:
+    get:
+      tags:
+      - carts
+      summary: Obtener un carrito por ID
+      description: Este endpoint permite obtener un carrito.
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          description: ID del carrito
+          schema:
+            type: string
+      responses:
+        200:
+          description: Carrito obtenido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/GetCartById'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/InternalServerError'
+    delete:
+      tags:
+      - carts
+      summary: Eliminar un carrito
+      description: Este endpoint permite eliminar un carrito.
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+  
