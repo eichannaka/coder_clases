@@ -1,0 +1,6 @@
+URI_MONGO="mongodb+srv://hamipluf:K_9KzACNVfT-X6e@cluster0.pmrma3u.mongodb.net/ecommerce?retryWrites=true&w=majority"
+SECRET_JWT="SecretoDeCoderhouse"
+SECRET_COOKIE="CoookieCodeHouse20203"
+NODE_ENV="desarrollo" || "produccion"
+emalAdmin="coderadmin@hotmail.com"
+passwordAdmin="123456"

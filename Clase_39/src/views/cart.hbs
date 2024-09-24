@@ -1,0 +1,37 @@
+<head>
+  <link rel="stylesheet" href="styles/cart.css" />
+
+</head>
+{{>navBar}}
+
+{{#if products}}
+{{#each products}}
+  <div>
+
+    <div class="product_card">
+      <img class="product_img" src={{_id.thumbnail}} alt="product" />
+      <div class="product_card-body">
+        <h1 class="product_title">{{_id.title}}</h1>
+        <p class="product_description">Description: {{_id.description}}</p>
+        <p class="product_price"> Price: {{_id.price}}</p>
+        <h4 class="product_quiantity"> Cantidad: {{quantity}}</h4>
+      </div>
+      <div class="product_card-action">
+        <button onclick="deleteProduct('{{_id._id}}')" class="product_btn">Eliminar Producto</button>
+        <button onclick="addProduct('{{_id._id}}')" class="product_btn">Agregar
+          Producto</button>
+      </div>
+    </div>
+  </div>
+{{/each}}
+{{else}}
+<h2>No hay productos</h2>
+{{/if}}
+<div class="divider"></div>
+<div class="go-to-pay">
+  <div class="product_count"><p>Total: {{total}}</p></div>
+  <div class="pay-action">
+    <button onclick="goToPay()" class="button-61-green">Ir a pagar</button>
+    <button onclick="goToBuy()" class="button-61">Volver a comprar</button>
+  </div>
+</div>  

@@ -1,0 +1,31 @@
+.cuerpo {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #f20808;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    background-color: #f24d3e;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  

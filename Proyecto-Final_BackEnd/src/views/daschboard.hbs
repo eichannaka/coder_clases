@@ -1,0 +1,42 @@
+<head>
+  <link rel="stylesheet" href="styles/dashboard.css" />
+</head>
+{{>navBar}}
+<h1>Dashboard</h1>
+<div>
+  {{#each users}}
+    <div class="card">
+      <h2>{{_id}}</h2>
+      <h3>Nombre: {{first_name}} {{last_name}}</h3>
+      <h4>Email: {{email}}</h4>
+      <h4>Age: {{age}}</h4>
+      <h4>Actual Role: {{role}}</h4>
+      <h4>Ultima Acividad: {{ultimaActividad}}</h4>
+      <div class="card-form">
+        <span> Role: </span>
+        <label>
+          Premium
+          <input type="checkbox" onclick="isPremium()"/>
+        </label>
+        <label>
+          User
+          <input type="checkbox" onclick="isUser()"/>
+        </label>
+        <label>
+          Admin
+          <input type="checkbox" onclick="isAdmin()"/>
+        </label>
+        <button onclick="changeRole('{{_id}}')" class="button-50">Change Role
+        </button>
+        <button onclick="deleteUser('{{_id}}')" class="button-51">Delete User
+        </button>
+
+      </div>
+
+      <div class="action-card">
+
+      </div>
+    </div>
+  {{/each}}
+</div>
+<script src="js/dashboard.js"></script>

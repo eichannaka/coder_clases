@@ -1,0 +1,862 @@
+paths:
+  /api/products:
+    get:
+      tags:
+        - Products
+      summary: >-
+        Devuelve todos los productos por filtro, en caso de no aclarar limite
+        devuelve todos los productos
+      parameters:
+        - name: limit
+          in: query
+          description: Limite de documentos que devuelve
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: 10
+        - name: sort
+          in: query
+          description: Ordena de forma acendente "asc", o descendente "desc" el precio
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: asc
+        - name: page
+          in: query
+          description: Define el numero de la pagina del documento
+          required: false
+          explode: true
+          schema:
+            type: number
+            default: 1
+        - name: query
+          in: query
+          description: >-
+            Trae los elementos por la categora o por el estado del producto
+            segun el stock
+          required: false
+          explode: true
+          schema:
+            type: number
+            default: any
+      responses:
+        "200":
+          description: (Respuesta correta) La respuesta fue enviada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Products"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/products/:pid:
+    get:
+      tags:
+        - Products
+      summary: Devuelve un solo poroducto por el PID (Product ID)
+      parameters:
+        - name: pid
+          in: params
+          description: ID del producto a devolver
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 64485e7baa994645c7aee15f
+      responses:
+        "200":
+          description: (Respuesta correta) La respuesta fue enviada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Product_id"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/products/:
+    post:
+      tags:
+        - Products
+      summary: >-
+        Agrega un producto a la DataBase y devuelve el producto creado
+        (Unicamente a los que poseen el role = "user || premium")
+      requestBody:
+        description: Crea un nuevo producto en la DataBase
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddProducts"
+      responses:
+        "200":
+          description: (Respuesta correta) La respuesta fue enviada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddProductResponse"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/products/:pid/:
+    put:
+      tags:
+        - Products
+      summary: Modifica un solo poroducto por el PID (Product ID)
+      parameters:
+        - name: pid
+          in: query
+          description: ID del producto a modificar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 64485e7baa994645c7aee15f
+      requestBody:
+        description: Modifica un producto en la DataBase por el ProductID
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UdapteProduct"
+      responses:
+        "200":
+          description: (Respuesta correta) La respuesta fue enviada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/UdapteProductResponse"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/products/:pidd:
+    delete:
+      tags:
+        - Products
+      summary: >-
+        Elimina el producto de la DataBase
+        (Unicamente a los que poseen el role = "user" || "premium")
+      parameters:
+        - name: pid
+          in: query
+          description: ID del producto a eliminar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 64485e7baa994645c7aee15f
+      responses:
+        "200":
+          description: (Respuesta correta) El producto fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteProduct"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts:
+    get:
+      tags:
+        - Carts
+      summary: >-
+        Devuelve todos los carritos con sus respectivas compras
+      responses:
+        "200":
+          description: (Respuesta correta) El producto fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts/:cid:
+    get:
+      tags:
+        - Carts
+      summary: >-
+        Devuelve el carrito con sus respectivos productos
+      parameters:
+        - name: cid
+          in: query
+          description: ID del carrito a devolver
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 645cf915ee747738834c24a5
+      responses:
+        "200":
+          description: (Respuesta correta) El producto fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartId"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts/:cid/purchase:
+    get:
+      tags:
+        - Carts
+      summary: >-
+        Finaliza el proceso de compra
+      parameters:
+        - name: cid
+          in: query
+          description: ID del carrito a pagar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 645cf915ee747738834c24a5
+      responses:
+        "200":
+          description: (Respuesta correta) El producto fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartPay"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts/:
+    post:
+      tags:
+        - Carts
+      summary: >-
+        Crea un carro sin nececidad de pasarle ningun parametro
+      responses:
+        "200":
+          description: (Respuesta correta) El producto fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateCart"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts/:cid/product/:pid:
+    post:
+      tags:
+        - Carts
+      summary: >-
+        Agrega un producto al carrito
+      parameters:
+        - name: cid
+          in: query
+          description: ID del carrito
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 645cf915ee747738834c24a5
+        - name: pid
+          in: query
+          description: ID del producto a agregar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 64485e7baa994645c7aee15f
+      responses:
+        "200":
+          description: (Respuesta correta) El producto fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddProductToCart"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts/:cid/:
+    put:
+      tags:
+        - Carts
+      summary: >-
+        Actualiza el carrito entero
+      parameters:
+        - name: cid
+          in: query
+          description: ID del carrito a modificar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 646f6c0a54e26d3254c79a69
+      requestBody:
+        description: Modifica el carrito en la DataBase por CartId
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UdapteCartBody"
+      responses:
+        "200":
+          description: (Respuesta correta) El producto fue actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UdapteCart"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts/:cid/products/:pid:
+    put:
+      tags:
+        - Carts
+      summary: >-
+        Actualiza la cantidad del producto por body
+      parameters:
+        - name: cid
+          in: query
+          description: ID del carrito a modificar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 646f6c0a54e26d3254c79a69
+        - name: pid
+          in: query
+          description: ID del producto a modificar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 6407be69c391bf81534ba6bf
+      requestBody:
+        description: Modifica la cantidad de un producto en la DataBase por el CartId y ProductId
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UdapteCartBody"
+      responses:
+        "200":
+          description: (Respuesta correta) El carrito fue Modificado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UdapteCart"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts/:cidd/:
+    delete:
+      tags:
+        - Carts
+      summary: >-
+        Elimina todos los productos del carrito
+      parameters:
+        - name: cid
+          in: query
+          description: ID del carrito a eliminar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 646f6c0a54e26d3254c79a69
+      responses:
+        "200":
+          description: (Respuesta correta) El carrito fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteAllCart"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+  /api/carts/:cid/products/:pid/:
+    delete:
+      tags:
+        - Carts
+      summary: >-
+        Elimina el producto indicado por params (pid)
+      parameters:
+        - name: cid
+          in: query
+          description: ID del carrito a eliminar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 646f6c0a54e26d3254c79a69
+        - name: pid
+          in: query
+          description: ID del producto a eliminar
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: 6407be69c391bf81534ba6bf
+      responses:
+        "200":
+          description: (Respuesta correta) El carrito fue eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteProductToCart"
+        "400":
+          description: >-
+            (BadRequest) los datos enviados son incorrectos o hay datos
+            obligatorios no enviados'
+        "404":
+          description: (NotFuound) no se encontro la informacion
+        "500":
+          description: error en el servidor
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        status:
+          type: string
+          description: estado de la respuesta
+          example: succses
+        payload:
+          type: array
+          items:
+            example:
+              _id: 64485e7baa994645c7aee15f
+              title: remera adidas
+              description: remara adidas blanca con logo negro
+              code: 3123
+              price: 12000
+              status: true
+              stock: 7
+              category: shirt
+              thumbnail:
+                - >-
+                  https://woker.vtexassets.com/arquivos/ids/221458-800-800?v=637643322523500000&width=800&height=800&aspect=true
+              __v: 0
+              owner: 64233c951b08676bbd9b6366
+        totalPages:
+          type: number
+          description: Cantidad de paginas
+          example: 6
+        prevPage:
+          type: number
+          description: Numero de pag si tiene pagina previa, null si lo contrario
+          example: null
+        nextPage:
+          type: number
+          description: Numero de pag si tiene pagina siguiente, null si lo contrario
+          example: 2
+        hasPrevPage:
+          type: boolean
+          description: True si tiene pagina previa False si lo contrario
+          example: false
+        hasNextPage:
+          type: boolean
+          description: True si tiene pagina siguiente False si lo contrario
+          example: true
+        prevLink:
+          type: string
+          description: Link de la pagina anterior, null si no tiene
+          example: null
+        nextLink:
+          type: string
+          description: Link de la pagina siguiente, null si no tiene
+          example: http://localhost:8080/api/products?page=2
+    Product_id:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: estado de la respuesta
+          example: 64485e7baa994645c7aee15f
+        title:
+          type: string
+          description: titulo del producto
+          example: remera adidas
+        description:
+          type: string
+          description: descrpcion del producto
+          example: remara adidas blanca con logo negro
+        code:
+          type: number
+          description: codigo unico del producto
+          example: 3123
+        price:
+          type: number
+          description: precio del producto
+          example: 12000
+        status:
+          type: boolean
+          description: estado disponible del producto
+          example: true
+        stock:
+          type: number
+          description: cantidad de stock del producto
+          example: 7
+        category:
+          type: string
+          description: categoria del producto
+          example: shirt
+        thumbnail:
+          type: array
+          description: Imagenes del producto
+          items:
+            example: >-
+              https://woker.vtexassets.com/arquivos/ids/221458-800-800?v=637643322523500000&width=800&height=800&aspect=true
+        __v:
+          type: number
+          description: creado por mongoDB
+          example: 0
+        owner:
+          type: object
+          description: Dueño del producto publicado
+          example:
+            _id: 64233c951b08676bbd9b6366
+            first_name: "Alejandro "
+            last_name: Gumma
+            email: alegumma@hotmail.com
+            age: 65
+            role: premium
+    AddProducts:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Titulo o nombre del producto
+          example: Camiseta Nike 17
+        description:
+          type: string
+          description: Descripcion del producto
+          example: Camiseta color mate con el logo en cian de nike
+        code:
+          type: number
+          description: Codigo unico del producto
+          example: 48482
+        price:
+          type: number
+          description: Precio del producto
+          example: 120
+        status:
+          type: boolean
+          description: Estado del producto (Por default true)
+          example: true
+        stock:
+          type: number
+          description: Cantidad del producto
+          example: 12
+        category:
+          type: string
+          description: Categoria del producto
+          example: T-Shirt
+        thumbnail:
+          type: array
+          description: Imagenes del producto
+          items:
+            example:
+              Url1: >-
+                https://bukmark.com.ar/wp-content/uploads/2017/03/IN09-Buzo-de-Arquero-Nike-LS-Park-Goalie-II-azul-600x600.jpg
+    AddProductResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        message:
+          type: string
+          description: Mensage de respuesta
+          example: El producto a sido agregado correctamente
+        product:
+          type: objetId
+          description: Id del producto creado
+          example: 646f5eba7c568210c8b3ed03
+    UdapteProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Titulo o nombre del producto
+        description:
+          type: string
+          description: Descripcion del producto
+        code:
+          type: number
+          description: Codigo unico del producto
+        price:
+          type: number
+          description: Precio del producto
+        status:
+          type: boolean
+          description: Estado del producto (Por default true)
+        stock:
+          type: number
+          description: Cantidad del producto
+        category:
+          type: string
+          description: Categoria del producto
+        thumbnail:
+          type: array
+          description: Imagenes del producto
+          items:
+            example:
+              Url1: ""
+    UdapteProductResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        message:
+          type: string
+          description: Mensage de respuesta
+          example: El producto a sido actualizado correctamente
+        data:
+          type: object
+          description: Producto actualizado
+          example:
+            {
+              "_id": "646f5e76500c786dd6009e85",
+              "title": "titulo modificado",
+              "description": "description modificado",
+              "code": code modificado,
+              "price": price modificado,
+              "status": true,
+              "stock": stock modificado,
+              "category": "Category Modificado",
+              "thumbnail": ["Url1": Modificado, "Url2": Modificado],
+              "owner": "643f2b7d7203c517eeee6f48",
+              "__v": 0,
+            }
+    DeleteProduct:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        message:
+          type: string
+          description: Mensage de respuesta
+          example: El producto a sido eliminado correctamente
+    Cart:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        data:
+          type: array
+          description: Data del carrito
+          items:
+            {
+              example:
+                {
+                  _id: "645a4c3aab07fc577cb5e5cb",
+                  products:
+                    [
+                      {
+                        "_id":
+                          {
+                            "_id": "64485e7baa994645c7aee15f",
+                            "title": "remera adidas",
+                            "description": "remara adidas blanca con logo negro",
+                            "code": 3123,
+                            "price": 12000,
+                            "status": true,
+                            "stock": 7,
+                            "category": "shirt",
+                            "thumbnail":
+                              [
+                                "https://woker.vtexassets.com/arquivos/ids/221458-800-800?v=637643322523500000&width=800&height=800&aspect=true",
+                              ],
+                            "__v": 0,
+                            "owner": "64233c951b08676bbd9b6366",
+                          },
+                        "quantity": 1,
+                        "total": 0,
+                      },
+                    ],
+                  "__v": 16,
+                },
+            }
+    CartId:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        data:
+          type: object
+          description: Estado de la respuesta (Successful || Error)
+          example:
+            {
+              cartById:
+                { _id: "645cf915ee747738834c24a5", products: [], __v: 1 },
+              total: 0,
+            }
+    CartPay:
+      type: object
+      properties:
+        cart:
+          type: object
+          description: Carrito de compras a pagar
+          example:
+            {
+              cartById: { products: [{ quantity: 1, total: 0, _id: {} }] },
+              total: 62000,
+            }
+        ticket:
+          type: object
+          description: Ticket de compra
+          example:
+            {
+              _id: "646f6d5b2cf43fb6fa77fd75",
+              amount: 62000,
+              code: "RHDVc",
+              purchase_datetime: "2023-05-25T14:14:07.210Z",
+              purchaser: "alegumma@hotmail.com",
+              __v: 0,
+            }
+    CreateCart:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        message:
+          type: string
+          description: Mensage de respuesta
+          example: El carrito a sido creado correctamente
+        cart:
+          type: object
+          description: Carrito creado
+          example: { _id: 646f6f81b2e711ea50103b12, products: [], __v: 0 }
+    UdapteCart:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        data:
+          type: object
+          description: Devuelve el id del carrito y el arreglo de productos del mismo carrito
+          example:
+            {
+              _id: 646f6c0a54e26d3254c79a69,
+              products:
+                [{ _id: 645e4b8bc564ac34c7224393, quantity: 2, total: 0 }],
+              __v: 1,
+            }
+    UdapteCartBody:
+      type: object
+      properties:
+        quantity:
+          type: number
+          description: Cantidad de producto en el carrito
+          example: 2
+    DeleteAllCart:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        message:
+          type: string
+          description: Mensage de la respuesta
+          example: Producto eliminado correctamente
+    DeleteProductToCart:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        message:
+          type: string
+          description: Mensage de la respuesta
+          example: Producto eliminado correctamente
+    AddProductToCart:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Estado de la respuesta (Successful || Error)
+          example: Successful
+        message:
+          type: string
+          description: Mensage de la respuesta
+          example: Producto añadido correctamente
+        data:
+          type: object
+          description: Carrito con el producto agregado
+          example:
+            {
+              _id: 646f6f81b2e711ea50103b12,
+              products:
+                [{ _id: 64485e7baa994645c7aee15f, quantity: 1, total: 0 }],
+            }

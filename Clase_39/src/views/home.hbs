@@ -1,0 +1,45 @@
+{{>navBar}}
+
+<h1 class="title">Todos los productos hasta el momento</h1>
+
+<h2 class="welcome">Un placer tenerte de vuelta:
+  <span id="current_first"></span>
+  <span id="current_last"></span></h2>
+
+  <ul class="listado">
+         {{#if user}}
+                {{#each document}}
+        <li><h1>{{title}}</h1><h2>Category: {{category}}</h2><p>Description:
+            {{description}}</p><p>Code: {{code}}</p><p id="pid">Id: {{_id}}</p><p>Price:
+            {{price}}</p><p>Status: {{status}}</p><p>Stock: {{stock}}</p><p>Image:
+             {{thumbnail}}</p>
+             <div class="list_action">
+              <button 
+                    class="btn-add-to-cart"
+                    id="add_to_cart" 
+                    onclick="agregar('{{_id}}')">
+                    Agregar al Carrito
+                  </button>
+              <button 
+                    class="btn-see-saler"
+                    id="owner_product" 
+                    onclick="seeOwner('{{_id}}')">
+                    Ver vendedor
+                  </button>
+             </div>
+            </li>
+    {{/each}}
+    {{else}}
+                  {{#each document}}
+        <li><h1>{{title}}</h1><h2>Category: {{category}}</h2><p>Description:
+            {{description}}</p><p>Code: {{code}}</p><p id="pid">Id: {{_id}}</p><p>Price:
+            {{price}}</p><p>Status: {{status}}</p><p>Stock: {{stock}}</p><p>Image:
+             {{thumbnail}}</p>
+                   </li>
+    {{/each}}
+            {{/if}}
+            
+
+  </ul>
+ 
+         
